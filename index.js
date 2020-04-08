@@ -12,6 +12,9 @@ const PORT = process.env.PORT || 5000
 const dotenv = require('dotenv')
 dotenv.config()
 
+const configureDatabse = require('./db/configure')
+configureDatabse(process.env['MONGO_URI'])
+
 console.log()
 
 app.use(
