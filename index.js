@@ -63,4 +63,9 @@ app.get('/', (req, res) => {
   res.send('Passport Federated Login')
 })
 
+app.get('/logout', (req, res) => {
+  req.logout()
+  res.redirect('/')
+})
+
 server.listen(PORT, () => console.log(`Server is runngin on ${PORT}`))
