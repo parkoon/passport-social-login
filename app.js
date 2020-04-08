@@ -50,7 +50,10 @@ app.get('/', (req, res) => {
   } else {
     res.send(`
         <h3>Node Passport Social Login</h3>
-        <a href="/auth/login/google">Login with Google+</a>    
+        <a href="/auth/login/google">Login with Google+</a>
+        <a href="/auth/login/facebook">Login with Facebook</a>
+        <a href="/auth/login/naver">Login with Naver</a>
+        <a href="/auth/login/kakao">Login with Kakao</a>
     `)
   }
 })
