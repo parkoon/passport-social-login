@@ -13,8 +13,8 @@ dotenv.config()
 /**
  * 데이터 베이스 세팅
  */
-const configureDatabase = require('./config/database')
-configureDatabase(process.env['MONGO_URI'])
+// const configureDatabase = require('./config/database')
+// configureDatabase(process.env['MONGO_URI'])
 
 /**
  * 세션 세팅
