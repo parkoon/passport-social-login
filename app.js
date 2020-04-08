@@ -34,6 +34,25 @@ configurePassport(passport)
 const authRouter = require('./routes/auth')
 app.use('/auth', authRouter)
 
-app.get('/', (req, res) => res.send('<h3>Node Passport Social Login</h3>'))
+app.get('/', (req, res) => {
+  /**
+   * req.user가 있는 경우는 소셜 로그인에 성공한 경우
+   * passport에 의해 user가 주입됨 (deserialize 확인)
+   */
+  if (req.user) {
+    res.send(`
+        <h3>Login Success</h3>
+        <a href="/auth/logout">Logout</a>
+        <p>
+            ${JSON.stringify(req.user, null, 2)}
+        </p>
+      `)
+  } else {
+    res.send(`
+        <h3>Node Passport Social Login</h3>
+        <a href="/auth/login/google">Login with Google+</a>    
+    `)
+  }
+})
 
 server.listen(PORT, () => console.log(`Server is runngin on ${PORT}`))
