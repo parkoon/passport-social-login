@@ -15,8 +15,6 @@ dotenv.config()
 const configureDatabse = require('./db/configure')
 configureDatabse(process.env['MONGO_URI'])
 
-console.log()
-
 app.use(
   session({
     secret: process.env['SESSION_SECRET'],
@@ -53,6 +51,15 @@ passport.deserializeUser((user, done) => {
   console.log('deserialize user', user)
   done(null, user) // 여기서 전달되는 user 가 req.user
 })
+
+/**
+ * Routing
+ */
+const usersRouter = require('./routes/users')
+const loginRouter = require('./routes/login')
+
+app.use('/users', usersRouter)
+app.use('/login', loginRouter)
 
 app.get('/login/google', passport.authenticate('google', { scope: ['profile'] }))
 app.get(
