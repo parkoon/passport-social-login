@@ -9,11 +9,14 @@ const server = http.createServer(app)
 
 const PORT = process.env.PORT || 5000
 
-const secret = require('./config/secret')
+const dotenv = require('dotenv')
+dotenv.config()
+
+console.log()
 
 app.use(
   session({
-    secret: secret.SESSION_SECRET,
+    secret: process.env['SESSION_SECRET'],
     cookie: { maxAge: 60 * 60 * 1000 },
     resave: true,
     saveUninitialized: false,
@@ -26,9 +29,9 @@ app.use(passport.session())
 passport.use(
   new GoogleStrategy(
     {
-      clientID: secret.GOOGLE_CLIENT_ID,
-      clientSecret: secret.GOOGLE_CLIENT_SECRET,
-      callbackURL: secret.GOOGLE_CALLBACK,
+      clientID: process.env['GOOGLE_CLIENT_ID'],
+      clientSecret: process.env['GOOGLE_CLIENT_SECRET'],
+      callbackURL: process.env['GOOGLE_CALLBACK'],
     },
     function (accessToken, refreshToken, profile, done) {
       console.log('accessToken', accessToken)
